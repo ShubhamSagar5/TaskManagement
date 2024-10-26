@@ -1,5 +1,6 @@
 import React from 'react'
 import Sidebar from '../components/Home/Sidebar'
+import { Outlet } from 'react-router-dom'
 
 const Home = () => {
   return (
@@ -8,7 +9,7 @@ const Home = () => {
             <Sidebar/>
         </div>
         <div className='w-5/6 rounded-xl border border-gray-300 p-4'>
-            hello2
+            <Outlet/>
         </div>
     </div>
   )

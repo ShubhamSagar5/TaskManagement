@@ -1,0 +1,8 @@
+/* App.css */
+.active-link {
+    text-decoration: underline;
+    text-decoration-color: white; /* Customize color */
+    text-decoration-thickness: 2px; /* Optional: set thickness */
+    text-underline-offset: 2px; /* Optional: adjust offset */
+  }
+  
