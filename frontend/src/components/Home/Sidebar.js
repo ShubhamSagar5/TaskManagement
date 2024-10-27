@@ -38,7 +38,7 @@ const Sidebar = () => {
         <p className="mt-2">har@gmail.com</p>
         <hr />
       </div>
-      <div className=" h-2/6 flex flex-col gap-4 justify-between p-2">
+      <div className=" h-2/6 flex flex-col mt-2 justify-between p-2">
         {data?.map((item, i) => {
           return (
            <NavLink to={item.path}  className={({isActive}) => (isActive ? 'active-link' : "")} >

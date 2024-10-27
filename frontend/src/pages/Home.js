@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 const Home = () => {
   return (
-    <div className='flex gap-4 h-[100%]'>
+    <div className='flex gap-4 h-full w-full'>
         <div className=' w-1/6 rounded-xl border border-gray-300 p-4'>
             <Sidebar/>
         </div>

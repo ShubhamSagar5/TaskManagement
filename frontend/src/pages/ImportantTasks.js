@@ -1,8 +1,11 @@
 import React from 'react'
+import Card from '../components/Home/Card'
 
 const ImportantTasks = () => {
   return (
-    <div>ImportantTasks</div>
+    <div>
+      <Card/>
+    </div>
   )
 }
 
