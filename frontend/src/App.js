@@ -5,6 +5,8 @@ import AllTasks from './pages/AllTasks'
 import CompleteTasks from './pages/CompleteTasks'
 import ImportantTasks from './pages/ImportantTasks'
 import IncompleteTasks from './pages/IncompleteTasks'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
 
 const App = () => {
   
@@ -30,6 +32,14 @@ const App = () => {
           element:<IncompleteTasks/>
         }
       ]
+    },
+    {
+      path:"/login",
+      element:<Login/>
+    },
+    {
+      path:"/signup",
+      element:<Signup/>
     }
   ])
   
