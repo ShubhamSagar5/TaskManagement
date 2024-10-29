@@ -1,5 +1,4 @@
 const mongoose = require('mongoose') 
-const validator = require('validator')
 
 
 const tasksSchema = new mongoose.Schema({
@@ -7,10 +6,10 @@ const tasksSchema = new mongoose.Schema({
         type:String,
         required:true,
         trim:true,
-        minLen:[3,"Title must have at least 3 letter"]
+        minlength:[3,"Title must have at least 3 letter"]
     },
     description:{
-        trype:String,
+        type:String,
         required:true,
 
     },
@@ -27,7 +26,7 @@ const tasksSchema = new mongoose.Schema({
 })
 
 
-const Tasks = mongoose.model("tasks",tasksSchema) 
+const Tasks = mongoose.model('tasks',tasksSchema) 
 
 module.exports = {
     Tasks

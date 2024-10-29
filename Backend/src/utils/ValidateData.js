@@ -9,6 +9,21 @@ const validateSignUpData = (password) => {
 
 } 
 
+
+const validateTasksData = (title,description) => {
+
+    if(!title || !description){
+         throw new Error("Title and description required")
+    }
+
+    if(title?.length < 3 || description?.length < 3){
+        throw new Error("Title and description must contain at least 3 characters.")
+    }
+    
+
+}
+
 module.exports = {
-    validateSignUpData
+    validateSignUpData,
+    validateTasksData
 }

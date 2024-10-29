@@ -2,7 +2,10 @@ const express = require('express')
 const { DbConnection } = require('./config/DatabaseConnection')
 const dotenv = require('dotenv')
 const cors = require('cors')
-const UserRouter = require('./routes/routes')
+const UserRouter = require('./routes/UserRoutes')
+const TasksRouter = require('./routes/TasksRoutes')
+const cookieParser = require('cookie-parser')
+
 
 const app = express() 
 
@@ -11,10 +14,11 @@ dotenv.config({
 })
 
 app.use(cors())
-
 app.use(express.json())
+app.use(cookieParser())
 
 app.use("/api/v1",UserRouter)
+app.use("/api/v1",TasksRouter)
 
 
 
