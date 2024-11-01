@@ -7,6 +7,7 @@ import ImportantTasks from './pages/ImportantTasks'
 import IncompleteTasks from './pages/IncompleteTasks'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import {Toaster} from 'react-hot-toast'
 
 const App = () => {
   
@@ -47,6 +48,7 @@ const App = () => {
   return (
     <div className='bg-gray-900 text-white h-screen p-2'>
       <RouterProvider router={appRouter}/>
+      <Toaster/>
     </div>
   )
 }

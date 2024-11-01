@@ -15,7 +15,7 @@ const signUp = async(req,res) => {
             })
         }
 
-        validateSignUpData(password)
+        validateSignUpData(password,email)
 
         const existingUserName = await User.findOne({$or:[
             {userName},
@@ -80,8 +80,8 @@ const login = async(req,res) => {
             const getJwtToken = await jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:"1d"}) 
             // console.log(getJwtToken)
             
-            return res.cookie("token",getJwtToken).status(200).json({
-                sucess:true,
+            return res.cookie("token",getJwtToken,{httpOnly:true}).status(200).json({
+                success:true,
                 message:`${user.userName} Login Successfully`
             })
 

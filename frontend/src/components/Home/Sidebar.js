@@ -4,8 +4,12 @@ import { MdLabelImportantOutline } from "react-icons/md";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { GrTasks } from "react-icons/gr";
 import { IoMdLogOut } from "react-icons/io";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import '../../App.css'
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
+import { logout, setLoading } from "../../store/slice/authSlice";
 
 const Sidebar = () => {
   const data = [
@@ -31,6 +35,22 @@ const Sidebar = () => {
     },
   ];
 
+  const dispatch  = useDispatch()
+  const navigate = useNavigate()
+
+  const handleLogout = async() => {
+    try {
+      dispatch(setLoading(true))
+      const res = await axios.get("http://localhost:3000/api/v1/logout") 
+      toast.success(res.data.message)
+      dispatch(logout())
+      navigate("/login")
+ dispatch(setLoading(false))
+    } catch (error) {
+      toast.error(error.response.data.message)
+    }
+  }
+
   return (
     <div className=" flex flex-col justify-between h-full">
       <div>
@@ -54,7 +74,7 @@ const Sidebar = () => {
       <div className="p-3">
         <div className="flex gap-3 border border-gray-300 rounded-lg p-2 items-center hover:bg-gray-700  hover:border hover:border-black cursor-pointer">
           <IoMdLogOut size={20}/>
-          <button>Logout</button>
+          <button onClick={handleLogout}>Logout</button>
         </div>
       </div>
     </div>

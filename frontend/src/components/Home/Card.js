@@ -63,7 +63,7 @@ const Card = ({home,setAddInputData,setShowCard}) => {
                     </div>
                     <div className='flex items-center gap-4'>
                       <div>
-                        <button className={`${item.status == "Incomplete" ? 'bg-red-500' : 'bg-green-500'} p-1 px-2 rounded-sm `}>{item.status}</button>
+                        <button className={`${item.status === "Incomplete" ? 'bg-red-500' : 'bg-green-500'} p-1 px-2 rounded-sm `}>{item.status}</button>
                        </div>
                        <div className='w-full flex text-2xl justify-between'>
                         <button><AiOutlineLike/></button>

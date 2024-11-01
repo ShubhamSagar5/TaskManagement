@@ -1,10 +1,14 @@
 const validator = require('validator')
 
 
-const validateSignUpData = (password) => {
+const validateSignUpData = (password,email) => {
 
     if(!validator.isStrongPassword(password)){
         throw new Error("Please provide valid Strong Password")
+    }
+
+    if(!validator.isEmail(email)){
+        throw new Error("Please provide valid email")
     }
 
 } 
