@@ -13,7 +13,10 @@ dotenv.config({
     path:"./.env"
 })
 
-app.use(cors())
+app.use(cors({
+    origin:"*",
+    credentials:true
+}))
 app.use(express.json())
 app.use(cookieParser())
 
@@ -39,7 +42,7 @@ DbConnection()
 .then(()=>{
     console.log("Database Connected Successfully")
 
-    app.listen(3000,(req,res)=>{
+    app.listen(process.env.PORT,(req,res)=>{
         console.log('Server is listen on Port Number ' + process.env.PORT)
     })
 })

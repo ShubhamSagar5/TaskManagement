@@ -41,9 +41,10 @@ const Sidebar = () => {
   const handleLogout = async() => {
     try {
       dispatch(setLoading(true))
-      const res = await axios.get("http://localhost:3000/api/v1/logout") 
+      const res = await axios.get("http://localhost:3001/api/v1/logout") 
       toast.success(res.data.message)
       dispatch(logout())
+      localStorage.clear()
       navigate("/login")
  dispatch(setLoading(false))
     } catch (error) {

@@ -19,11 +19,13 @@ const Home = () => {
   
 
   useEffect(()=>{
-    if(localStorage.getItem('token')){
-      
+    
+    // console.log(localStorage.getItem('token'))
+    
+    if(localStorage.getItem('token') && localStorage.getItem('userId')){
       dispatch(login())
     }
-    else if(!loggedIn){
+    else if (!loggedIn){
     navigate("/signup")
   }
   },[])

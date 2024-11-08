@@ -1,9 +1,10 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { login, setLoading } from '../store/slice/authSlice'
 import toast from 'react-hot-toast'
+import Cookies  from 'js-cookie'
 
 const Login = () => {
 
@@ -11,6 +12,7 @@ const Login = () => {
   const loading = useSelector((store)=>store.auth.loading)
   const navigate  = useNavigate() 
   const dispatch = useDispatch() 
+  const loggedIn = useSelector((store)=>store?.auth?.loggedIn)
 
   const handleLoginData = (e) => {
     setData({...data,[e.target.name]:e.target.value})
@@ -19,21 +21,25 @@ const Login = () => {
   const handleLogin = async() => {
     try {
       dispatch(setLoading(true))
-      const res = await axios.post('http://localhost:3000/api/v1/login',data,{
+      const res = await axios.post('http://localhost:3001/api/v1/login',data,{
         headers:{
           'Content-Type':'application/json'
         },
         withCredentials:true
       })
-      console.log(res)
      toast.success(res.data.message) 
         dispatch(login()) 
         setData({userName:'',password:''})
+        
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('userId',res.data.userId)
+    
         navigate("/")
         dispatch(setLoading(false))
       
 
     } catch (error) {
+      console.log(error)
       if (error.response) {
         toast.error(error.response.data.message)
         console.error("Response error:", error.response.data);
@@ -45,7 +51,11 @@ const Login = () => {
     }
   }
 
-
+  useEffect(()=>{
+    if(localStorage.getItem('token') && localStorage.getItem('userId')){
+      navigate("/")
+    }
+  },[])
 
   return (
     <div className=' h-[98%] flex justify-center items-center'>

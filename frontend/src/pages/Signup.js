@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {toast} from 'react-hot-toast'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLoading } from '../store/slice/authSlice'
+import { login, setLoading } from '../store/slice/authSlice'
 
 const Signup = () => {
-  
+   const navigate = useNavigate() 
+
   
   const [data,setData] = useState({userName:'',email:'',password:''}) 
+  const loggedIn = useSelector((store)=>store?.auth?.loggedIn)
 
-  const navigate = useNavigate() 
+ 
   const dispatch = useDispatch()
   const loading = useSelector((store)=>store.auth.loading)
 
@@ -29,11 +31,11 @@ const handleSignUp = async() => {
       return toast.error('User Name at least contain 3 letter')
     }
 
-    const res = await axios.post('http://localhost:3000/api/v1/signup',data)
+    const res = await axios.post('http://localhost:3001/api/v1/signup',data)
     if(res.data.success){
       toast.success(res.data.message)
       setData({userName:'',email:'',password:''})
-      navigate('/signup')
+      navigate('/login')
     }
     
   } catch (error) {
@@ -42,7 +44,13 @@ const handleSignUp = async() => {
     dispatch(setLoading(false))
   }
 }  
-  
+useEffect(()=>{
+  if(localStorage.getItem('token') && localStorage.getItem('userId')){
+    navigate("/")
+  }
+},[])
+
+
   return (
     <div className=' h-[98%] flex justify-center items-center'>
         

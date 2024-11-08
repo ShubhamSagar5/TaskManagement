@@ -82,6 +82,8 @@ const login = async(req,res) => {
             
             return res.cookie("token",getJwtToken,{httpOnly:true}).status(200).json({
                 success:true,
+                token:getJwtToken,
+                userId:user._id,
                 message:`${user.userName} Login Successfully`
             })
 
