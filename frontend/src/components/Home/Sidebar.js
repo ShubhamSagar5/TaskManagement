@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaTasks } from "react-icons/fa";
 import { MdLabelImportantOutline } from "react-icons/md";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
@@ -36,7 +36,12 @@ const Sidebar = () => {
   ];
 
   const dispatch  = useDispatch()
-  const navigate = useNavigate()
+  const navigate = useNavigate() 
+
+  const [userInfo,setUserInfo] = useState({
+    userName:'',
+    email:''
+  })
 
   const handleLogout = async() => {
     try {
@@ -52,11 +57,35 @@ const Sidebar = () => {
     }
   }
 
+  const fetchUserDetails = async () => {
+    try {
+      const id = localStorage.getItem('userId')
+      console.log(id)
+      const userData = await axios.post('http://localhost:3001/api/v1/getInfo',{id:id},{
+        headers:{
+          'Content-Type':'application/json'
+        },
+        withCredentials:true
+      }) 
+      setUserInfo({
+        userName:userData.data.data.userName,
+        email:userData.data.data.email  
+      })
+
+    } catch (error) {
+      console.log(error.response.data.message)
+    }
+  }
+
+  useEffect(()=>{
+    fetchUserDetails()
+  },[])
+
   return (
     <div className=" flex flex-col justify-between h-full">
       <div>
         <p className="font-bold text-xl">Stay Organized Always</p>
-        <p className="mt-2">har@gmail.com</p>
+        <p className="mt-2">{userInfo.email}</p>
         <hr />
       </div>
       <div className=" h-2/6 flex flex-col mt-2 justify-between p-2">
