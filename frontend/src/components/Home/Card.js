@@ -1,12 +1,15 @@
-import React from 'react' 
+import React, { useEffect, useState } from 'react' 
 import { AiOutlineLike } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import axios from 'axios';
 
 
 const Card = ({home,setAddInputData,setShowCard}) => {
  
+  const [cardData,setCardData] = useState([])
+
     const data = [
         
                 {
@@ -49,12 +52,33 @@ const Card = ({home,setAddInputData,setShowCard}) => {
       setAddInputData(true)
       setShowCard(false)
     }
+
+    const getTasksData = async() => {
+      try {
+        
+        const res = await axios.get('http://localhost:3001/api/v1/getAllTasks',{
+          headers:{
+            Authorization : `Bearer ${localStorage.getItem('token')}`
+          },
+          withCredentials:true
+        })
+
+        setCardData(res?.data?.allTasks?.tasks || [])
+
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
  
- 
+    useEffect(()=>{
+      getTasksData()
+    },[])
+
     return (
     <div className='grid grid-rows-1 md:grid-cols-4  gap-4  p-1'>
         {
-            data && data?.map((item)=>{
+            cardData && cardData?.map((item)=>{
                 return (
                     <div className='flex flex-col justify-between bg-gray-800 rounded-sm p-3'>
                     <div>
@@ -63,7 +87,7 @@ const Card = ({home,setAddInputData,setShowCard}) => {
                     </div>
                     <div className='flex items-center gap-4'>
                       <div>
-                        <button className={`${item.status === "Incomplete" ? 'bg-red-500' : 'bg-green-500'} p-1 px-2 rounded-sm `}>{item.status}</button>
+                        <button className={`${item.completed ? 'bg-green-500' : 'bg-red-500'} p-1 px-2 rounded-sm `}>{item.completed ? 'Completed' : 'Incomplete'}</button>
                        </div>
                        <div className='w-full flex text-2xl justify-between'>
                         <button><AiOutlineLike/></button>

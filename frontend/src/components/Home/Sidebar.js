@@ -60,7 +60,6 @@ const Sidebar = () => {
   const fetchUserDetails = async () => {
     try {
       const id = localStorage.getItem('userId')
-      console.log(id)
       const userData = await axios.post('http://localhost:3001/api/v1/getInfo',{id:id},{
         headers:{
           'Content-Type':'application/json'
@@ -68,8 +67,8 @@ const Sidebar = () => {
         withCredentials:true
       }) 
       setUserInfo({
-        userName:userData.data.data.userName,
-        email:userData.data.data.email  
+        userName:userData?.data?.data?.userName,
+        email:userData?.data?.data?.email  
       })
 
     } catch (error) {
@@ -85,7 +84,7 @@ const Sidebar = () => {
     <div className=" flex flex-col justify-between h-full">
       <div>
         <p className="font-bold text-xl">Stay Organized Always</p>
-        <p className="mt-2">{userInfo.email}</p>
+        <p className="mt-2">{userInfo && userInfo.email}</p>
         <hr />
       </div>
       <div className=" h-2/6 flex flex-col mt-2 justify-between p-2">
