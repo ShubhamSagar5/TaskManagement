@@ -123,7 +123,7 @@ const importantTasks = async(req,res) => {
 
         return res.status(200).json({
             success:true,
-            message:'Important Tasks Added Successfully'
+            message:'Important Tasks Update Successfully'
         })
 
     } catch (error) {
@@ -215,6 +215,31 @@ const getCompleteTasks = async(req,res) => {
     }
 }
 
+const getIncompleteData = async(req,res) => {
+    try {
+        
+        const user = req.user
+
+        const getData = await User.findById(user._id).select('-password').populate({
+            path:'tasks',
+            options:{sort:{createdAt:-1}},
+            match:{completed:false}
+        })
+
+        return res.status(200).json({
+            success:true,
+            message:'Incomplete Data fetch successfully',
+            data:getData
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
 module.exports = {
     createTaks,
     getAllTasks,
@@ -223,5 +248,6 @@ module.exports = {
     importantTasks,
     completeTasks,
     getImportantTasks,
-    getCompleteTasks
+    getCompleteTasks,
+    getIncompleteData
 }

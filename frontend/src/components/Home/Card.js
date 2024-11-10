@@ -3,12 +3,12 @@ import { AiOutlineLike } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import axios from 'axios';
+import { AiFillLike } from "react-icons/ai";
 
 
-const Card = ({home,setAddInputData,setShowCard}) => {
+
+const Card = ({home,setAddInputData,setShowCard,cardData,show,updateCompleteStatus,updateImportantTasksStatus,deleteTasksFn,setUpdatedData}) => {
  
-  const [cardData,setCardData] = useState([])
 
     const data = [
         
@@ -53,48 +53,47 @@ const Card = ({home,setAddInputData,setShowCard}) => {
       setShowCard(false)
     }
 
-    const getTasksData = async() => {
-      try {
-        
-        const res = await axios.get('http://localhost:3001/api/v1/getAllTasks',{
-          headers:{
-            Authorization : `Bearer ${localStorage.getItem('token')}`
-          },
-          withCredentials:true
-        })
-
-        setCardData(res?.data?.allTasks?.tasks || [])
-
-
-      } catch (error) {
-        console.log(error)
-      }
+   const handleCompleteTasksStatus  = (tasksId) => {
+      updateCompleteStatus(tasksId)
     }
- 
-    useEffect(()=>{
-      getTasksData()
-    },[])
+  const handleImportantTasks  = (tasksId) => {
+    updateImportantTasksStatus(tasksId)
+  }
+
+  const handleDeleteTasks = (tasksId) => {
+    deleteTasksFn(tasksId)
+  }
+
+  const handleEdit = (id,title,description) => {
+    handleCardDispaly()
+    setUpdatedData({id:id,title:title,description:description})
+  }
+
 
     return (
     <div className='grid grid-rows-1 md:grid-cols-4  gap-4  p-1'>
         {
             cardData && cardData?.map((item)=>{
                 return (
-                    <div className='flex flex-col justify-between bg-gray-800 rounded-sm p-3'>
+                    <div className='flex flex-col justify-between bg-gray-800 rounded-sm p-3' key={item._id}>
                     <div>
                          <h3 className='text-xl font-semibold'>{item.title}</h3>
                         <p className='text-gray-300 my-2'>{item.description}</p>
                     </div>
-                    <div className='flex items-center gap-4'>
+
+                    {
+                      show && <div className='flex items-center gap-4'>
                       <div>
-                        <button className={`${item.completed ? 'bg-green-500' : 'bg-red-500'} p-1 px-2 rounded-sm `}>{item.completed ? 'Completed' : 'Incomplete'}</button>
+                        <button onClick={()=>handleCompleteTasksStatus(item._id)} className={`${item.completed ? 'bg-green-500' : 'bg-red-500'} p-1 px-2 rounded-sm `}>{item.completed ? 'Completed' : 'Incomplete'}</button>
                        </div>
                        <div className='w-full flex text-2xl justify-between'>
-                        <button><AiOutlineLike/></button>
-                        <button><FaRegEdit/></button>
-                        <button><MdDeleteOutline/></button>
+                        {item.important ? <button onClick={()=>handleImportantTasks(item._id)}><AiFillLike/></button> :<button onClick={()=>handleImportantTasks(item._id)}><AiOutlineLike/></button>}
+                        <button onClick={()=>handleEdit(item._id,item.title,item.description)}><FaRegEdit/></button>
+                        <button onClick={()=>handleDeleteTasks(item._id)}><MdDeleteOutline/></button>
                        </div>
                     </div>
+                    }
+                    
                        
                     </div>
                 )
