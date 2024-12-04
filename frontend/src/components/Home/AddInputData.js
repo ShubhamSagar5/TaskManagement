@@ -38,11 +38,12 @@ const AddInputData = ({
   const createTasks = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:3001/api/v1/createTasks",
+        "https://taskmanagement-7nrk.onrender.com/api/v1/createTasks",
         data,
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           withCredentials: true,
         }
@@ -59,7 +60,7 @@ const AddInputData = ({
     try {
   
       const res = await axios.put(
-        `http://localhost:3001/api/v1/updateTasks/${updatedData.id}`,
+        `https://taskmanagement-7nrk.onrender.com/api/v1/updateTasks/${updatedData.id}`,
         data,
         {
           headers: {

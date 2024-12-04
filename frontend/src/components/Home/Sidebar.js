@@ -46,7 +46,7 @@ const Sidebar = () => {
   const handleLogout = async() => {
     try {
       dispatch(setLoading(true))
-      const res = await axios.get("http://localhost:3001/api/v1/logout") 
+      const res = await axios.get("https://taskmanagement-7nrk.onrender.com/api/v1/logout") 
       toast.success(res.data.message)
       dispatch(logout())
       localStorage.clear()
@@ -60,7 +60,7 @@ const Sidebar = () => {
   const fetchUserDetails = async () => {
     try {
       const id = localStorage.getItem('userId')
-      const userData = await axios.post('http://localhost:3001/api/v1/getInfo',{id:id},{
+      const userData = await axios.post('https://taskmanagement-7nrk.onrender.com/api/v1/getInfo',{id:id},{
         headers:{
           'Content-Type':'application/json'
         },

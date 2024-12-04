@@ -10,7 +10,7 @@ const ImportantTasks = () => {
   const  getImportantTasks = async() => {
     try {
       
-      const res = await axios.get('http://localhost:3001/api/v1/importantTasks',{
+      const res = await axios.get('https://taskmanagement-7nrk.onrender.com/api/v1/importantTasks',{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`}
       })
