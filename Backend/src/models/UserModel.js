@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
         trim:true,
         validate(value){
             if(!validator.isEmail(value)){
-                console.log("email")
+             
                 throw new Error('Plesae Provide Valid Email')
             }
         }
@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
         required:[true,'Password is required'],
         trim:true,
         validate(value){
-            console.log(value)
+        
             if(!validator.isStrongPassword(value,{
                 minLength: 8,
                 minLowercase: 1,
@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
                 minNumbers: 1,
                 minSymbols: 1
             })){
-                console.log("password")
+               
                 throw new Error('Plesae Provide Valid Email')
             }
         }

@@ -57,7 +57,7 @@ const AddInputData = ({
 
   const updateTasks = async () => {
     try {
-      console.log(data)
+  
       const res = await axios.put(
         `http://localhost:3001/api/v1/updateTasks/${updatedData.id}`,
         data,

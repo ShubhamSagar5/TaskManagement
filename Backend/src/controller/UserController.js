@@ -78,7 +78,7 @@ const login = async(req,res) => {
         if(comparePassword){
 
             const getJwtToken = await jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:"1d"}) 
-            // console.log(getJwtToken)
+            
             
             return res.cookie("token",getJwtToken,{httpOnly:true}).status(200).json({
                 success:true,
