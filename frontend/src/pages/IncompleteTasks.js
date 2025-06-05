@@ -11,7 +11,7 @@ const IncompleteTasks = () => {
   const getIncompleteData = async() => {
     try {
       
-      const res = await axios.get('https://taskmanagement-7nrk.onrender.com/api/v1/incompleteTasks',{
+      const res = await axios.get('http://localhost:4000/api/v1/incompleteTasks',{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
@@ -26,7 +26,7 @@ const IncompleteTasks = () => {
     getIncompleteData()
   },[])
 
-  return (
+  return incompletecardData?.length == 0 ? (<div className='text-center'>Incompleted Data Not Found</div>) : (
     <div>
       <Card cardData={incompletecardData}/>
     </div>

@@ -32,11 +32,11 @@ const Home = () => {
 
 
   return (
-    <div className='flex gap-4 h-full w-full'>
-        <div className=' w-1/6 rounded-xl border border-gray-300 p-4'>
+    <div className='flex flex-col  md:flex-row gap-5 md:gap-4 h-full w-full'>
+        <div className=' md:w-1/6 rounded-xl border border-gray-300 p-4'>
             <Sidebar/>
         </div>
-        <div className='w-5/6 rounded-xl border border-gray-300 p-4'>
+        <div className='md:w-5/6 rounded-xl border border-gray-300 p-4'>
             <Outlet/>
         </div>
     </div>

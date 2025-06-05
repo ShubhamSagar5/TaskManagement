@@ -46,7 +46,7 @@ const Sidebar = () => {
   const handleLogout = async() => {
     try {
       dispatch(setLoading(true))
-      const res = await axios.get("https://taskmanagement-7nrk.onrender.com/api/v1/logout") 
+      const res = await axios.get("http://localhost:4000/api/v1/logout") 
       toast.success(res.data.message)
       dispatch(logout())
       localStorage.clear()
@@ -60,7 +60,7 @@ const Sidebar = () => {
   const fetchUserDetails = async () => {
     try {
       const id = localStorage.getItem('userId')
-      const userData = await axios.post('https://taskmanagement-7nrk.onrender.com/api/v1/getInfo',{id:id},{
+      const userData = await axios.post('http://localhost:4000/api/v1/getInfo',{id:id},{
         headers:{
           'Content-Type':'application/json'
         },
@@ -100,10 +100,10 @@ const Sidebar = () => {
         })}
       </div>
 
-      <div className="p-3">
-        <div className="flex gap-3 border border-gray-300 rounded-lg p-2 items-center hover:bg-gray-700  hover:border hover:border-black cursor-pointer">
+      <div className="p-3 md:mt-0 mt-6">
+        <div className="flex gap-3 border border-gray-300 rounded-lg p-2 items-center hover:bg-gray-700  hover:border hover:border-black cursor-pointer" onClick={handleLogout} >
           <IoMdLogOut size={20}/>
-          <button onClick={handleLogout}>Logout</button>
+          <button >Logout</button>
         </div>
       </div>
     </div>

@@ -21,18 +21,18 @@ const Login = () => {
   const handleLogin = async() => {
     try {
       dispatch(setLoading(true))
-      const res = await axios.post('https://taskmanagement-7nrk.onrender.com/api/v1/login',data,{
+      const res = await axios.post('http://localhost:4000/api/v1/login',data,{
         headers:{
           'Content-Type':'application/json'
         },
         withCredentials:true
       })
-     toast.success(res.data.message) 
+     toast.success(res?.data?.message) 
         dispatch(login()) 
         setData({userName:'',password:''})
         
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('userId',res.data.userId)
+      localStorage.setItem('token', res?.data?.token);
+      localStorage.setItem('userId',res?.data?.userId)
     
         navigate("/")
         dispatch(setLoading(false))
@@ -40,8 +40,8 @@ const Login = () => {
 
     } catch (error) {
       console.log(error)
-      if (error.response) {
-        toast.error(error.response.data.message)
+      if (error?.response) {
+        toast.error(error?.response?.data?.message)
         console.error("Response error:", error.response.data);
       } else {
         toast.error("Unexpected error")
@@ -58,16 +58,16 @@ const Login = () => {
   },[])
 
   return (
-    <div className=' h-[98%] flex justify-center items-center'>
+    <div className='h-[100vh] md:h-[98%] flex justify-center items-center'>
         
-    <div className='flex bg-gray- flex-col w-3/12 p-1 rounded-lg border border-gray-200'>
+    <div className='flex bg-gray- flex-col text-2xl md:text-2xl md:w-3/12 p-1 rounded-lg border border-gray-200'>
         <h2 className='text-3xl font-semibold p-2 '>Login</h2>
         <input type="text" className='text-lg m-3 outline-none rounded-sm bg-gray-700  p-1' name='userName' value={data.userName} onChange={handleLoginData} placeholder='Username' />
         {/* <input type="text" name='email' className='text-lg m-3 outline-none rounded-sm bg-gray-700  p-1' placeholder='Email' /> */}
         <input type="text" name='password' className='text-lg m-3 outline-none rounded-sm bg-gray-700  p-1' value={data.password} onChange={handleLoginData} placeholder='Password' />
-        <div className='flex items-center justify-between'>
-             <button className='bg-blue-900 p-1 w-3/12 rounded-md m-3' onClick={handleLogin}>Login</button>
-        <Link to={"/signup"}><p> New User ? Please Signup</p></Link>
+        <div className='flex md:items-center justify-around'>
+             <button className='bg-blue-900 p-1 w-10/12 md:text-base md:w-3/12 rounded-md m-3' onClick={handleLogin}>Login</button>
+        <Link to={"/signup"}><p className='text-lg md:text-sm'> New User ? Please Signup</p></Link>
         </div>
        
         

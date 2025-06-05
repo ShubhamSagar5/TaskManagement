@@ -9,7 +9,7 @@ const CompleteTasks = () => {
 
   const getCompleteCardData = async() => {
     try {
-      const res = await axios.get('https://taskmanagement-7nrk.onrender.com/api/v1/completeTasks',{
+      const res = await axios.get('http://localhost:4000/api/v1/completeTasks',{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
@@ -27,7 +27,9 @@ const CompleteTasks = () => {
     getCompleteCardData()
   },[])
   
-  return (
+  
+
+  return completeCardData?.length == 0 ? (<div className='text-center'>No Completed Task Found</div>) :(
     <div>
       <Card cardData={completeCardData}/>
     </div>

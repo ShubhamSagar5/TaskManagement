@@ -38,7 +38,7 @@ const AddInputData = ({
   const createTasks = async () => {
     try {
       const res = await axios.post(
-        "https://taskmanagement-7nrk.onrender.com/api/v1/createTasks",
+        "http://localhost:4000/api/v1/createTasks",
         data,
         {
           headers: {
@@ -60,7 +60,7 @@ const AddInputData = ({
     try {
   
       const res = await axios.put(
-        `https://taskmanagement-7nrk.onrender.com/api/v1/updateTasks/${updatedData.id}`,
+        `http://localhost:4000/api/v1/updateTasks/${updatedData.id}`,
         data,
         {
           headers: {
@@ -92,18 +92,18 @@ const AddInputData = ({
   return (
     <>
       <div
-        className="cursor-pointer absolute w-9/12 flex justify-end"
+        className="cursor-pointer absolute ml-7 md:ml-0 w-9/12 flex justify-end"
         onClick={hadleShowCard}
       >
         <MdCancel size={40} />
       </div>
-      <div className="w-full h-[93vh] bg-gray-900  rounded-lg flex flex-col items-center pt-32">
+      <div className="w-full md:h-[93vh] bg-gray-900  rounded-lg flex flex-col items-center md:pt-32">
         <div className="mb-4">
           <p className="text-3xl text-white ">Add Tasks</p>
         </div>
         <div className="w-full flex flex-col justify-center items-center p-1 text-white">
           <input
-            className="w-2/6 mb-3 bg-gray-800 rounded-sm px-2 py-3  text-xl outline-none"
+            className="md:w-2/6 mb-3 bg-gray-800 rounded-sm px-2 py-3  text-xl outline-none"
             type="text"
             name="title"
             id=""
@@ -112,7 +112,7 @@ const AddInputData = ({
             value={data.title}
           />
           <textarea
-            className="w-2/6 bg-gray-800 rounded-sm px-2 py-3  text-xl outline-none"
+            className="md:w-2/6 bg-gray-800 rounded-sm px-2 py-3  text-xl outline-none"
             rows={10}
             name="description"
             id=""

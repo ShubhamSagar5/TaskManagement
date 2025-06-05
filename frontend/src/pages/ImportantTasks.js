@@ -10,7 +10,7 @@ const ImportantTasks = () => {
   const  getImportantTasks = async() => {
     try {
       
-      const res = await axios.get('https://taskmanagement-7nrk.onrender.com/api/v1/importantTasks',{
+      const res = await axios.get('http://localhost:4000/api/v1/importantTasks',{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`}
       })
@@ -26,7 +26,7 @@ const ImportantTasks = () => {
   useEffect(()=>{
     getImportantTasks()
   },[])
-  return (
+  return importantTasks?.length == 0 ? (<div className='text-center'>Important Tasks Not Found</div>):(
     <div>
       <Card cardData={importantTasks} show={false}/>
     </div>

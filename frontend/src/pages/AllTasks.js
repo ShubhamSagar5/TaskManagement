@@ -3,6 +3,8 @@ import Card from '../components/Home/Card'
 import AddInputData from '../components/Home/AddInputData'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
+import { setTasksLength } from '../store/slice/authSlice'
 
 const AllTasks = () => {
   
@@ -11,6 +13,8 @@ const AllTasks = () => {
   const [cardData,setCardData] = useState([])
   const [tasksUpdate,setTasksUpdate] = useState(false)
  
+  const dispatch = useDispatch()
+
   const [updatedData,setUpdatedData] = useState({
     id:'',
     title:'',
@@ -20,7 +24,7 @@ const AllTasks = () => {
   const getTasksData = async() => {
     try {
       
-      const res = await axios.get('https://taskmanagement-7nrk.onrender.com/api/v1/getAllTasks',{
+      const res = await axios.get('http://localhost:4000/api/v1/getAllTasks',{
         headers:{
           Authorization : `Bearer ${localStorage.getItem('token')}`
         },
@@ -29,6 +33,7 @@ const AllTasks = () => {
 
       setCardData(res?.data?.allTasks?.tasks || [])
       setTasksUpdate(!tasksUpdate)
+      dispatch(setTasksLength(cardData?.length))
 
     } catch (error) {
       console.log(error)
@@ -38,27 +43,27 @@ const AllTasks = () => {
   const updateCompleteStatus = async(tasksId) => {
     try {
       
-      const res = await axios.get(`https://taskmanagement-7nrk.onrender.com/api/v1/completeTasks/${tasksId}`,{
+      const res = await axios.get(`http://localhost:4000/api/v1/completeTasks/${tasksId}`,{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
       })
-      toast.success(res.data.message)
+      toast.success(res?.data?.message)
       setTasksUpdate(!tasksUpdate)
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error?.response?.data?.message)
     }
   } 
 
   const updateImportantTasksStatus = async(tasksId) => {
     try {
-      const res = await axios.get(`https://taskmanagement-7nrk.onrender.com/api/v1/importantTasks/${tasksId}`,{
+      const res = await axios.get(`http://localhost:4000/api/v1/importantTasks/${tasksId}`,{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
       })
 
-      toast.success(res.data.message)
+      toast.success(res?.data?.message)
       setTasksUpdate(!tasksUpdate)
 
     } catch (error) {
@@ -68,15 +73,15 @@ const AllTasks = () => {
 
   const deleteTasksFn = async(tasksId) => {
     try {
-      const res = await axios.delete(`https://taskmanagement-7nrk.onrender.com/api/v1/deleteTasks/${tasksId}`,{
+      const res = await axios.delete(`http://localhost:4000/api/v1/deleteTasks/${tasksId}`,{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
       })
-      toast.success(res.data.message)
+      toast.success(res?.data?.message)
       setTasksUpdate(!tasksUpdate)
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error?.response?.data?.message)
     }
   }
 

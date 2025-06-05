@@ -38,7 +38,7 @@ app.use("/",(req,res)=>{
 //     })
 // })
 
-DbConnection()
+DbConnection() 
 .then(()=>{
     console.log("Database Connected Successfully")
 
