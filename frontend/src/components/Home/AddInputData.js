@@ -38,7 +38,7 @@ const AddInputData = ({
   const createTasks = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/v1/createTasks",
+        "/view/api/v1/createTasks",
         data,
         {
           headers: {
@@ -60,7 +60,7 @@ const AddInputData = ({
     try {
   
       const res = await axios.put(
-        `http://localhost:4000/api/v1/updateTasks/${updatedData.id}`,
+        `/view/api/v1/updateTasks/${updatedData.id}`,
         data,
         {
           headers: {

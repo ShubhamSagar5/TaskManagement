@@ -21,7 +21,7 @@ const Login = () => {
   const handleLogin = async() => {
     try {
       dispatch(setLoading(true))
-      const res = await axios.post('http://localhost:4000/api/v1/login',data,{
+      const res = await axios.post('/view/api/v1/login',data,{
         headers:{
           'Content-Type':'application/json'
         },

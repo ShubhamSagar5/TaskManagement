@@ -31,7 +31,7 @@ const handleSignUp = async() => {
       return toast.error('User Name at least contain 3 letter')
     }
 
-    const res = await axios.post('http://localhost:4000/api/v1/signup',data)
+    const res = await axios.post('/view/api/v1/signup',data)
     if(res?.data?.success){
       toast.success(res?.data?.message)
       setData({userName:'',email:'',password:''})
