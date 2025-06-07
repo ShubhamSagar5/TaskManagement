@@ -47,13 +47,13 @@ const Sidebar = () => {
     try {
       dispatch(setLoading(true))
       const res = await axios.get("http://localhost:4000/api/v1/logout") 
-      toast.success(res.data.message)
+      toast.success(res?.data?.message)
       dispatch(logout())
       localStorage.clear()
       navigate("/login")
  dispatch(setLoading(false))
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error?.response?.data?.message)
     }
   }
 
@@ -72,7 +72,7 @@ const Sidebar = () => {
       })
 
     } catch (error) {
-      console.log(error.response.data.message)
+      console.log(error?.response?.data?.message)
     }
   }
 
