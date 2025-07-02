@@ -24,7 +24,7 @@ const AllTasks = () => {
   const getTasksData = async() => {
     try {
       
-      const res = await axios.get('/view/api/v1/getAllTasks',{
+      const res = await axios.get('https://taskmanagement-tavq.onrender.com/api/v1/getAllTasks',{
         headers:{
           Authorization : `Bearer ${localStorage.getItem('token')}`
         },
@@ -43,7 +43,7 @@ const AllTasks = () => {
   const updateCompleteStatus = async(tasksId) => {
     try {
       
-      const res = await axios.get(`/view/api/v1/completeTasks/${tasksId}`,{
+      const res = await axios.get(`https://taskmanagement-tavq.onrender.com/api/v1/completeTasks/${tasksId}`,{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
@@ -57,7 +57,7 @@ const AllTasks = () => {
 
   const updateImportantTasksStatus = async(tasksId) => {
     try {
-      const res = await axios.get(`/view/api/v1/importantTasks/${tasksId}`,{
+      const res = await axios.get(`https://taskmanagement-tavq.onrender.com/api/v1/importantTasks/${tasksId}`,{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
@@ -73,7 +73,7 @@ const AllTasks = () => {
 
   const deleteTasksFn = async(tasksId) => {
     try {
-      const res = await axios.delete(`/view/api/v1/deleteTasks/${tasksId}`,{
+      const res = await axios.delete(`https://taskmanagement-tavq.onrender.com/api/v1/deleteTasks/${tasksId}`,{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }

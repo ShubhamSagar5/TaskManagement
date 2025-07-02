@@ -9,7 +9,7 @@ const CompleteTasks = () => {
 
   const getCompleteCardData = async() => {
     try {
-      const res = await axios.get('/view/api/v1/completeTasks',{
+      const res = await axios.get('https://taskmanagement-tavq.onrender.com/api/v1/completeTasks',{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }

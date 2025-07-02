@@ -38,7 +38,7 @@ const AddInputData = ({
   const createTasks = async () => {
     try {
       const res = await axios.post(
-        "/view/api/v1/createTasks",
+        "https://taskmanagement-tavq.onrender.com/api/v1/createTasks",
         data,
         {
           headers: {
@@ -60,7 +60,7 @@ const AddInputData = ({
     try {
   
       const res = await axios.put(
-        `/view/api/v1/updateTasks/${updatedData.id}`,
+        `https://taskmanagement-tavq.onrender.com/api/v1/updateTasks/${updatedData.id}`,
         data,
         {
           headers: {
